@@ -1,6 +1,7 @@
 import cv2
-
+import filters
 #Class for window handling
+
 class Window():
 
     def __init__(self,name):
@@ -16,9 +17,10 @@ class Window():
             return
         
         while video.isOpened():
-            success,frame = video.read()
+            success,self.myFrame = video.read()
             if success:
-                cv2.imshow(self._windowName,frame)
+                self.myFrame = filters.customAsymethric((3,3),self.myFrame)
+                cv2.imshow(self._windowName,self.myFrame)
 
                 if cv2.waitKey(25) & 0xFF == ord('q'):
                     break
@@ -28,7 +30,6 @@ class Window():
 
         video.release()
         cv2.destroyAllWindows()
-
 
 
     
