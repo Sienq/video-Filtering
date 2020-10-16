@@ -19,7 +19,7 @@ class Window():
         while video.isOpened():
             success,self.myFrame = video.read()
             if success:
-                self.myFrame = filters.customAsymethric((3,3),self.myFrame)
+                self.myFrame = filters.customBlur((5,5),self.myFrame)
                 cv2.imshow(self._windowName,self.myFrame)
 
                 if cv2.waitKey(25) & 0xFF == ord('q'):
