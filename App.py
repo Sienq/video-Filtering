@@ -32,14 +32,15 @@ class App(tkinter.Tk):
 
     def update(self):
 
-        self.ret,self.frame = self.video.getFrame()
         
-        if self.filtersGui.filterType == 'Normal':
+        #! FILTERS APPLYING
+        if not self.filtersGui.filterType == 'Normal':
+            self.ret,self.frame = self.video.getFrame()
+            self.frame = filters.ApplyFilter(self.filtersGui.filterType,frame = self.frame)
+        else:
             self.ret,self.frame = self.video.getFrame()
 
-        if self.filtersGui.filterType == 'Edge Detection':
-            self.frame = filters.customEdgeDetection((3,3),cv2.cvtColor(self.frame,cv2.COLOR_RGB2BGR))
-
+        #! DRAWING VIDEO FRAME
         if self.ret:
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(self.frame))
             self.canvas.create_image(0,0,image = self.photo,anchor=tkinter.NW)

@@ -53,4 +53,17 @@ def customAsymethric(ksize,img):
             cv2.filter2D(img,-1,kernel,img)
             return img
 
+def ApplyFilter(filterType,frame,ksize = (5,5)):
+    
+    if filterType == 'Edge Detection':
+        return customEdgeDetection(ksize,frame)
+    elif filterType == 'Custom Blur':
+        return customBlur(ksize,frame)
+    elif filterType == 'Custom Sharpen':
+        return customSharpen(ksize,frame)
+    elif filterType == 'Custom Asymethric':
+        return customAsymethric(ksize,frame)
+    else:
+        raise ValueError('There is no filter with this name',filterType)
+        
 
