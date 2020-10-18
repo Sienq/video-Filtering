@@ -16,6 +16,8 @@ class filtersGUI(tkinter.Frame):
         self.buttonSharpen.grid(row=4,column=0)
         self.buttonAsymethric = tkinter.Button(self,text = 'Asymethric',width = 50,command = self.asymethric)
         self.buttonAsymethric.grid(row=5,column=0)
+        self.buttonLaplacian = tkinter.Button(self,text = 'Laplacian',width = 50,command = self.laplacian)
+        self.buttonLaplacian.grid(row=6,column=0)
         
         self.filterType = 'Normal'
 
@@ -33,6 +35,9 @@ class filtersGUI(tkinter.Frame):
 
     def asymethric(self):
         self.filterType = 'Custom Asymethric'
+
+    def laplacian(self):
+        self.filterType = 'Custom Laplacian'
 
 
         

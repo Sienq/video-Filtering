@@ -53,6 +53,13 @@ def customAsymethric(ksize,img):
             cv2.filter2D(img,-1,kernel,img)
             return img
 
+def laplacian(img,ksize,blurKernel = (5,5)):
+    img = cv2.GaussianBlur(img,blurKernel,0)
+    img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    img = cv2.Laplacian(img,cv2.CV_16S,ksize)
+    img = cv2.convertScaleAbs(img)
+    return img
+
 def ApplyFilter(filterType,frame,ksize = (5,5)):
     
     if filterType == 'Edge Detection':
@@ -63,6 +70,8 @@ def ApplyFilter(filterType,frame,ksize = (5,5)):
         return customSharpen(ksize,frame)
     elif filterType == 'Custom Asymethric':
         return customAsymethric(ksize,frame)
+    elif filterType == 'Custom Laplacian':
+        return laplacian(frame,ksize)
     else:
         raise ValueError('There is no filter with this name',filterType)
         
