@@ -59,6 +59,10 @@ def laplacian(img,kersize,blurKernel = (3,3)):
     img = cv2.Laplacian(img,cv2.CV_16S,ksize = kersize[0])
     return img
 
+def canny(img):
+    return cv2.Canny(img,150,300)
+
+
 def ApplyFilter(filterType,frame,ksize = (3,3)):
     
     if filterType == 'Edge Detection':
@@ -71,6 +75,8 @@ def ApplyFilter(filterType,frame,ksize = (3,3)):
         return customAsymethric(ksize,frame)
     elif filterType == 'Custom Laplacian':
         return laplacian(frame,ksize)
+    elif filterType == 'Canny':
+        return canny(frame)
     else:
         raise ValueError('There is no filter with this name',filterType)
         

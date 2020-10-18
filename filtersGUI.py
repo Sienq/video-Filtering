@@ -18,6 +18,8 @@ class filtersGUI(tkinter.Frame):
         self.buttonAsymethric.grid(row=5,column=0)
         self.buttonLaplacian = tkinter.Button(self,text = 'Laplacian',width = 50,command = self.laplacian)
         self.buttonLaplacian.grid(row=6,column=0)
+        self.buttonCanny = tkinter.Button(self,text = 'Canny',width = 50,command = self.canny)
+        self.buttonCanny.grid(row=7,column=0)
         
         self.filterType = 'Normal'
 
@@ -38,6 +40,9 @@ class filtersGUI(tkinter.Frame):
 
     def laplacian(self):
         self.filterType = 'Custom Laplacian'
+    
+    def canny(self):
+        self.filterType = 'Canny'
 
 
         
