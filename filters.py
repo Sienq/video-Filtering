@@ -3,7 +3,7 @@ import numpy as np
 def customEdgeDetection(ksize,img):
 
     if int(ksize[0]) % 2 == 0 and int(ksize[1]) % 2 == 0 :
-        print("not valid ksize, both numbers must be odd")
+        raise ValueError("Rows and Columns must be odd",ksize)
         return
     else:
         img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -16,7 +16,7 @@ def customEdgeDetection(ksize,img):
 def customSharpen(ksize,img):
 
     if int(ksize[0]) % 2 == 0 and int(ksize[1]) % 2 == 0 :
-        print("not valid ksize, both numbers must be odd")
+        raise ValueError("Rows and Columns must be odd",ksize)
         return
     else:
         kernel = np.full(ksize,-1)
@@ -28,7 +28,7 @@ def customSharpen(ksize,img):
 def customBlur(ksize,img):
 
     if int(ksize[0]) % 2 == 0 and int(ksize[1]) % 2 == 0 :
-        print("not valid ksize, both numbers must be odd")
+        raise ValueError("Rows and Columns must be odd",ksize)
         return
     else:
         kernel = np.full(ksize,1.0/int(ksize[0])**2)
@@ -39,7 +39,7 @@ def customBlur(ksize,img):
 
 def customAsymethric(ksize,img):
         if int(ksize[0]) % 2 == 0 and int(ksize[1]) % 2 == 0 :
-            print("not valid ksize, both numbers must be odd")
+            raise ValueError("Rows and Columns must be odd",ksize)
             return
         else:
             kernel = np.zeros(ksize)
