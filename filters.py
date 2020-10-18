@@ -53,14 +53,13 @@ def customAsymethric(ksize,img):
             cv2.filter2D(img,-1,kernel,img)
             return img
 
-def laplacian(img,ksize,blurKernel = (5,5)):
-    img = cv2.GaussianBlur(img,blurKernel,0)
+def laplacian(img,kersize,blurKernel = (3,3)):
+    img = cv2.GaussianBlur(img,blurKernel,0,0)
     img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    img = cv2.Laplacian(img,cv2.CV_16S,ksize)
-    img = cv2.convertScaleAbs(img)
+    img = cv2.Laplacian(img,cv2.CV_16S,ksize = kersize[0])
     return img
 
-def ApplyFilter(filterType,frame,ksize = (5,5)):
+def ApplyFilter(filterType,frame,ksize = (3,3)):
     
     if filterType == 'Edge Detection':
         return customEdgeDetection(ksize,frame)
