@@ -20,15 +20,17 @@ class App(tkinter.Tk):
         self.filtersGui = fGUI.filtersGUI(self)
         self.filtersGui.grid(row=0,column=0)
 
+        self.pause = tkinter.Button(self,text = "Pause/Play",width = 50) #! NOT WORKING YET
+        self.pause.grid(row=1,column=1)
+
 
         self.delay = 1
         self.update()
 
 
-    def snapshot(self):
+    def snapshot(self): #! NOT WORKING YET
         if self.ret:
             cv2.imwrite('screenshot.png',cv2.cvtColor(self.frame,cv2.COLOR_RGB2BGR))
-
 
     def update(self):
 
@@ -36,7 +38,7 @@ class App(tkinter.Tk):
         #! FILTERS APPLYING
         if not self.filtersGui.filterType == 'Normal':
             self.ret,self.frame = self.video.getFrame()
-            self.frame = filters.ApplyFilter(self.filtersGui.filterType,frame = self.frame)
+            self.frame = filters.ApplyFilter(self.filtersGui.filterType,frame = self.frame,ksize=(int(self.filtersGui.filterValue.get()),int(self.filtersGui.filterValue.get())))
         else:
             self.ret,self.frame = self.video.getFrame()
 
@@ -45,7 +47,7 @@ class App(tkinter.Tk):
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(self.frame))
             self.canvas.create_image(0,0,image = self.photo,anchor=tkinter.NW)
 
-        self.after(self.delay,self.update)
+        self.after(self.delay,self.update)  
 
 
 

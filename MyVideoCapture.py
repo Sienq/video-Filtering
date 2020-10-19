@@ -12,7 +12,7 @@ class MyVideoCapture:
         
         self.height = frame.shape[0]
         self.width = frame.shape[1]
-        self.filterType = 'normal'
+        self.filterType = 'Normal'  #! GONNA BE USED FOR PAUSING VIDEO
 
     def __del__(self):
         if self.video.isOpened():
