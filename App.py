@@ -20,11 +20,13 @@ class App(tkinter.Tk):
         self.filtersGui = fGUI.filtersGUI(self)
         self.filtersGui.grid(row=0,column=0)
         #! PAUSE BUTTON
-        self.pause = tkinter.Button(self,text = "Pause/Play",width = 50) #! NOT WORKING YET
+        self.pause = tkinter.Button(self,text = "Pause",width = 50,command = self.pause) #! NOT WORKING YET
         self.pause.grid(row=1,column=1)
+        self.pause = tkinter.Button(self,text = "Play",width = 50,command = self.resume) #! NOT WORKING YET
+        self.pause.grid(row=2,column=1)
         #! SCREENSHOT BUTTON
         self.screenShot = tkinter.Button(self,text = 'Screenshot',width = 50,command = self.snapshot)
-        self.screenShot.grid(row = 2,column=1)
+        self.screenShot.grid(row = 3,column=1)
 
 
         self.delay = 1
@@ -35,6 +37,8 @@ class App(tkinter.Tk):
     def snapshot(self): #! NOT WORKING YET
         if self.ret:
             cv2.imwrite('screenshot%d.png' %(self.screenshotCounter),cv2.cvtColor(self.frame,cv2.COLOR_RGB2BGR))
+            self.screenshotCounter += 1
+    
 
     def update(self):
 
@@ -51,7 +55,21 @@ class App(tkinter.Tk):
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(self.frame))
             self.canvas.create_image(0,0,image = self.photo,anchor=tkinter.NW)
 
-        self.after(self.delay,self.update)  
+        if self.video.status:
+            self.after(self.delay,self.update)
+
+    def resumeVideo(self):
+        self.changeVideoStatus()
+        self.playVideo
+    
+    def pause(self):
+        self.video.status = 0
+
+    def resume(self):
+        self.video.status = 1
+        self.update()
+        
+
 
 
 
