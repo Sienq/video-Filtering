@@ -19,18 +19,22 @@ class App(tkinter.Tk):
         #! FILTERS GUI
         self.filtersGui = fGUI.filtersGUI(self)
         self.filtersGui.grid(row=0,column=0)
-
+        #! PAUSE BUTTON
         self.pause = tkinter.Button(self,text = "Pause/Play",width = 50) #! NOT WORKING YET
         self.pause.grid(row=1,column=1)
+        #! SCREENSHOT BUTTON
+        self.screenShot = tkinter.Button(self,text = 'Screenshot',width = 50,command = self.snapshot)
+        self.screenShot.grid(row = 2,column=1)
 
 
         self.delay = 1
         self.update()
+        self.screenshotCounter = 0
 
 
     def snapshot(self): #! NOT WORKING YET
         if self.ret:
-            cv2.imwrite('screenshot.png',cv2.cvtColor(self.frame,cv2.COLOR_RGB2BGR))
+            cv2.imwrite('screenshot%d.png' %(self.screenshotCounter),cv2.cvtColor(self.frame,cv2.COLOR_RGB2BGR))
 
     def update(self):
 
